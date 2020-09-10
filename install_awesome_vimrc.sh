@@ -1,18 +1,23 @@
 #!/bin/sh
+# set -x
 set -e
+# 获取当前脚本的目录
+vimrc_path=$(pwd)
+echo ${vimrc_path}
+# 备份配置
+echo "backup vimrc to ~/.vimrc"
+mv ~/.vimrc ~/.vimrc_bak
+# 生成vimrc配置
+echo "set runtimepath+=${vimrc_path}
 
-cd ~/.vim_runtime
-
-echo 'set runtimepath+=~/.vim_runtime
-
-source ~/.vim_runtime/vimrcs/basic.vim
-source ~/.vim_runtime/vimrcs/filetypes.vim
-source ~/.vim_runtime/vimrcs/plugins_config.vim
-source ~/.vim_runtime/vimrcs/extended.vim
+source ${vimrc_path}/vimrcs/basic.vim
+source ${vimrc_path}/vimrcs/filetypes.vim
+source ${vimrc_path}/vimrcs/plugins_config.vim
+source ${vimrc_path}/vimrcs/extended.vim
 
 try
-source ~/.vim_runtime/my_configs.vim
+source ${vimrc_path}/my_configs.vim
 catch
-endtry' > ~/.vimrc
+endtry" > ~/.vimrc
 
 echo "Installed the Ultimate Vim configuration successfully! Enjoy :-)"
